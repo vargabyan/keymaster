@@ -34,5 +34,20 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.0.8"
+  },
+  "description": "client",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vargabyan/keymaster.git"
+  },
+  "author": "vardan.gabrielyan.it@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vargabyan/keymaster/issues"
+  },
+  "homepage": "https://github.com/vargabyan/keymaster#readme"
 }
