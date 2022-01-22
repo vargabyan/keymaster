@@ -1,13 +1,41 @@
-const express = require("express");
+const express = require("express")
 const app = express()
-const port = 3000
+const config = require("config")
+const portHttp = config.get("portHttp")
+const portHttps= config.get("portHttps")
+const https = require("https")
+const fs = require("fs")
+const path = require("path")
 
-app.get("/", (request, response)=>{
-    response.send("hello world")
-})
+const options = {
+    // key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
+    // cert: fs.readFileSync('test/fixtures/keys/agent2-cert.pem')
+}
 
-app.get("*", (request, response)=>{
-    response.send("hello world")
-})
+if (process.env.NODE_ENV === "production" && !process.env.HTTPS) {
+    
+    app.use("/", express.static(path.join(path.parse(__dirname).dir, "client", "build")))
+    app.get("*", (request, response)=>{
+        response.sendFile(path.join(path.parse(__dirname).dir, "client", "build", "index.html"))
+    })
+} else if (process.env.NODE_ENV === "production" && process.env.HTTPS) {
 
-app.listen(port, ()=>{console.log(`Example app listening at http://localhost:${port}`)})
+    app.enable('trust proxy')
+    app.use(function(request, response, next) {
+  
+      if (!request.secure) {
+        return response.redirect("https://" + request.headers.host + request.url);
+      }
+  
+      next();
+    })
+}
+
+
+if (process.env.HTTPS) {
+    
+    https.createServer(options, app).listen(portHttps, ()=>{console.log(`Example app listening at http://localhost:${portHttps}`)})
+} else {
+    
+    app.listen(portHttp, ()=>{console.log(`Example app listening at http://localhost:${portHttp}`)})
+}

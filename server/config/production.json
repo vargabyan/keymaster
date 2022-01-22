@@ -1,3 +1,4 @@
 {
-    "port": 443
+    "portHttps": 443,
+    "portHttp": 3000
 }

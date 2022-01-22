@@ -1,10 +1,18 @@
 import React from "react";
+import Navigation from "./navigation/navigation";
+import { StyledEngineProvider } from '@mui/material/styles';
+import HeaderPoster from "./header_poster/headerPoster";
+// import { BrowserRouter, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline text-blue-600">
-      Hello world!
-    </h1>
+    <StyledEngineProvider injectFirst>
+      {/* <h1 className="text-red-500">
+        Hello world!
+      </h1> */}
+      <Navigation />
+      <HeaderPoster />
+    </StyledEngineProvider>
   );
 }
 

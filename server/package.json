@@ -1,26 +1,28 @@
 {
-  "dependencies": {
-    "express": "^4.17.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.16.5",
-    "@babel/node": "^7.16.5"
-  },
   "name": "server",
   "version": "1.0.0",
   "description": "server",
   "main": "app.js",
   "scripts": {
+    "start": "cross-env NODE-ENV=production HTTPS=true node app.js",
+    "client": "cd ../client && npm start",
+    "client-install": "cd ../client && npm install",
+    "server-install": "npm install",
+    "build": "cd ../client && npm run-script build",
+    "server": "nodemon app.js",
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vargabyan/keymaster.git"
   },
   "author": "vardan.gabrielyan.it@gmail.com",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/vargabyan/keymaster/issues"
+  "dependencies": {
+    "concurrently": "^7.0.0",
+    "config": "^3.3.6",
+    "express": "^4.17.2"
   },
-  "homepage": "https://github.com/vargabyan/keymaster#readme"
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "@babel/core": "^7.16.5",
+    "@babel/node": "^7.16.5"
+  }
 }
